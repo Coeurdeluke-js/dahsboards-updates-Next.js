@@ -1,0 +1,70 @@
+/* Triangular Background Texture */
+.triangle-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #121212; /* Base background color */
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  /* Main triangular grid pattern */
+  .triangle-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    background-image: 
+      linear-gradient(30deg, transparent 49.5%, #ec4d58 49.5%, #ec4d58 50.5%, transparent 50.5%),
+      linear-gradient(150deg, transparent 49.5%, #ec4d58 49.5%, #ec4d58 50.5%, transparent 50.5%),
+      linear-gradient(270deg, transparent 49.5%, #ec4d58 49.5%, #ec4d58 50.5%, transparent 50.5%);
+    background-size: 40px 40px;
+    background-position: center center;
+  }
+  
+  /* Overlay triangle pattern */
+  .triangle-background::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    background-image: 
+      linear-gradient(60deg, transparent 49.5%, #fafafa 49.5%, #fafafa 50.5%, transparent 50.5%),
+      linear-gradient(120deg, transparent 49.5%, #fafafa 49.5%, #fafafa 50.5%, transparent 50.5%);
+    background-size: 70px 70px;
+    background-position: center center;
+  }
+  
+  /* Subtle dot pattern */
+  .triangle-background .triangle-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(#fafafa 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.04;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    background-position: 0 0;
+  }
+  
+  /* Optional: Responsive adjustments */
+  @media (max-width: 768px) {
+    .triangle-background::before,
+    .triangle-background::after {
+      background-size: 30px 30px;
+    }
+    
+    .triangle-background .triangle-dots {
+      background-size: 20px 20px;
+    }
+  }

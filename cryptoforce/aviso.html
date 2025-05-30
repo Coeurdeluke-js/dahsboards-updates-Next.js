@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Force - Sistema en Desarrollo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
+    <style>
+        :root {
+            --dark: #121212;
+            --light: #fafafa;
+            --accent: #ec4d58;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding-top: 60px; /* Espacio para la navbar */
+        }
+        
+        .card {
+            background-color: rgba(18, 18, 18, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 3rem;
+            max-width: 700px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(236, 77, 88, 0.3);
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-logo {
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto 2rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .content {
+            margin: 2rem 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .back-button {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .back-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: transparent;
+            color: var(--light);
+            border: 2px solid var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--light);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 5s infinite;
+        }
+        
+        /* Ensure navbar has a higher z-index */
+        #navbar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes twinkle {
+            0% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.2;
+            }
+        }
+        
+        /* Media queries mejoradas */
+        @media (max-width: 992px) {
+            body {
+                padding-top: 50px;
+            }
+            
+            .card {
+                padding: 2.5rem;
+            }
+            
+            .card-logo {
+                max-width: 180px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 45px;
+                padding-bottom: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .card {
+                padding: 2rem;
+                margin: 20px auto;
+            }
+            
+            .card-logo {
+                max-width: 150px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 40px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-logo {
+                max-width: 120px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .back-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Fix for very small screens */
+        @media (max-width: 360px) {
+            .card {
+                padding: 1.2rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .card-logo {
+                max-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div id="navbar-container"></div>
+
+    <div class="card">
+        <img src="assets/logo.png" alt="Crypto Force Logo" class="card-logo">
+        
+        <div class="content">
+            <h1>Sistema de <span class="highlight">Registro en Desarrollo</span></h1>
+            <p>Nuestro equipo de desarrolladores está trabajando arduamente para completar el sistema de registro y acceso. Tu paciencia será recompensada con el <span class="highlight">conocimiento y herramientas</span> necesarias para dominar el mundo del trading en criptomonedas.</p>
+            <p>Prepárate para transformar tu vida financiera a través de la educación y el empoderamiento. El verdadero poder radica en el conocimiento y la disciplina.</p>
+        </div>
+        
+        <div class="back-button">
+            <button class="back-btn" id="backBtn"><i class="fas fa-arrow-left"></i></button>
+        </div>
+    </div>
+    
+    <script>
+        // Generate stars background
+        function createStars() {
+            const stars = document.getElementById('stars');
+            const count = 200;
+            
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random position
+                const x = Math.floor(Math.random() * window.innerWidth);
+                const y = Math.floor(Math.random() * window.innerHeight);
+                
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                
+                // Random size
+                const size = Math.random() * 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random delay for animation
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                stars.appendChild(star);
+            }
+        }
+        
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            
+            // Back button functionality
+            const backBtn = document.getElementById('backBtn');
+            backBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+
+    <script src="js/navbar.js"></script>
+</body>
+</html>

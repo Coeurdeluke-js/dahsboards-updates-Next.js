@@ -1,103 +1,129 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import '@/app/styles/home.css';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+    <main>
+      {/* Contenido izquierdo: Logo y botones */}
+      <div className="content-left">
+        <div className="logo-container">
+          <Image 
+            src="/logo.png" 
+            alt="Crypto Force Logo" 
+            className="main-logo"
+            width={400}  // Aumentado a 400 para agrandar el logo
+            height={200} // Aumentado proporcionalmente
+            priority={true}
+          />
+        </div>
+        <div className="button-group">
+          <a href="https://chat.whatsapp.com/JQJT3H0KE4u7WNiVc8QqxU" className="cta-button">
+            <i className="fas fa-rocket"></i> Comienza tu Viaje Galáctico
           </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+          <a href="/aviso" className="temario-button">
+            <i className="fas fa-home"></i> Accede a tu Cuenta
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      {/* Contenido derecho: Curso premium */}
+      <div className="content-right">
+        <div className="promo-section">
+          <div className="promo-header">
+            🚨 CURSO PREMIUM 🚨
+            <span className="discount-tag">-40%</span>
+          </div>
+          
+          <div className="feature-container">
+            <div className="feature-columns">
+              <div className="feature-column">
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>Acceso inmediato a formación grabada.</span>
+                </div>
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>15 días de periodo de prueba.</span>
+                </div>
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>Videos exclusivos con las claves que marcan la diferencia entre ganar y perder.</span>
+                </div>
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>Resolución de dudas personalizada.</span>
+                </div>
+              </div>
+              <div className="feature-column">
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>Clases en vivo periódicas para resolver dudas.</span>
+                </div>
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>A partir del día 16 se desbloquea el 100% del contenido.</span>
+                </div>
+                <div className="feature-item">
+                  <i className="fas fa-check-circle"></i>
+                  <span>Acceso ilimitado a la plataforma.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bonus-section">
+            <div className="bonus-title">🎁 BONUS INCLUIDOS:</div>
+            <div className="bonus-container">
+              <div className="bonus-columns">
+                <div className="bonus-column">
+                  <div className="bonus-item">
+                    <i className="fas fa-gift"></i>
+                    <span>Curso completo Introducción a las cripto</span>
+                  </div>
+                  <div className="bonus-item">
+                    <i className="fas fa-gift"></i>
+                    <span>Master class exclusivas</span>
+                  </div>
+                </div>
+                <div className="bonus-column">
+                  <div className="bonus-item">
+                    <i className="fas fa-gift"></i>
+                    <span>Curso Psicología del trading</span>
+                  </div>
+                  <div className="bonus-item">
+                    <i className="fas fa-gift"></i>
+                    <span>Resúmenes de libros especializados</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="price-container">
+            <span className="original-price">450€</span>
+            <span className="promo-price">270€</span>
+            <span className="promo-code">Código: 40%OFF</span>
+          </div>
+          
+          <div className="button-container">
+            <a href="https://hotmart.com/es/marketplace/productos/curso-criptomonedas-de-0-a-pro/M96551914V" className="cta-button">
+              <i className="fas fa-sign-in-alt"></i> INSCRÍBETE AHORA
+            </a>
+            <a href="/servicios/cursos" className="temario-button">
+              <i className="fas fa-list"></i> VER TEMARIO
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
+<Image 
+  src="/logo.png" 
+  alt="Crypto Force Logo" 
+  className="main-logo"
+  width={400}
+  height={200}
+  priority={true}
+/>

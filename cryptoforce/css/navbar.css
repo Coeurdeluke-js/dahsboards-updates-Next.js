@@ -1,0 +1,357 @@
+/* Navbar container */
+#navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Navbar Styles */
+/* Estilos para la navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Navbar para escritorio */
+.desktop-navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links a {
+  color: #f5f5f5;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links a i {
+  margin-right: 12px; /* Aumentado de 8px a 12px para más espacio */
+  font-size: 1em; /* Reducir ligeramente el tamaño de los iconos */
+}
+
+.navbar-links a:hover {
+  color: #ec4d58;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar para móviles */
+.mobile-navbar {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(18, 18, 18, 0.95);
+  padding: 8px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.mobile-navbar a {
+  color: #f5f5f5;
+  font-size: 1.2rem; /* Reducido de 1rem */
+  width: 28px; /* Reducido de 30px */
+  height: 28px; /* Reducido de 30px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+/* Posicionamiento del botón toggle */
+.mobile-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f5f5f5;
+  font-size: 1.4rem;
+  width: 36px;
+  height: 36px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  position: fixed; /* Cambiado de absolute a fixed para mejor posicionamiento */
+  right: 10px; /* Cambiado de 15px a 10px para moverlo más a la derecha */
+  top: 8px;
+  z-index: 9999;
+  background-color: rgba(236, 77, 88, 0.3);
+}
+
+.mobile-toggle:hover {
+  background-color: rgba(236, 77, 88, 0.5); /* Efecto hover para mejor interacción */
+}
+
+/* Navbar expandida para móviles */
+/* Estilos para la navbar móvil */
+.mobile-expanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Cambiado para ocupar toda la altura de la pantalla */
+  background-color: rgba(18, 18, 18, 0.98); /* Fondo más oscuro y semitransparente */
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  padding: 60px 20px 20px;
+  overflow-y: auto; /* Permitir scroll si hay muchos elementos */
+}
+
+/* Estilo para la cruz de cierre */
+.close-menu {
+  position: absolute;
+  top: 15px;
+  right: 15px; /* Cambiado de 50px a 15px para mejor visibilidad */
+  background-color: rgba(236, 77, 88, 0.5); /* Fondo rojo más visible */
+  border: none;
+  color: #ffffff !important;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+/* Estilos para los enlaces del menú móvil */
+.mobile-expanded a {
+  color: #f5f5f5 !important;
+  text-decoration: none;
+  font-size: 1rem; /* Reducido de 1.2rem a 1rem */
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* Estilo para la cruz de cierre */
+.close-menu {
+  position: fixed; /* Cambiado de absolute a fixed */
+  top: 8px; /* Ajustado para alinearse con el ícono del menú */
+  right: 10px; /* Cambiado para coincidir con la posición del ícono del menú */
+  background-color: rgba(236, 77, 88, 0.5);
+  border: none;
+  color: #ffffff !important;
+  font-size: 1.3rem; /* Reducido de 1.5rem a 1.3rem */
+  cursor: pointer;
+  z-index: 1001;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 32px; /* Reducido de 36px a 32px */
+  height: 32px; /* Reducido de 36px a 32px */
+  border-radius: 50%;
+}
+
+.close-menu:hover {
+  background-color: rgba(236, 77, 88, 0.6); /* Más visible al pasar el cursor */
+}
+
+/* Estilo para el botón Sith Clash en la navbar de escritorio */
+.sith-clash-button {
+  background-color: transparent;
+  color: #ec4d58;
+  font-weight: 700;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none; /* Eliminar el subrayado predeterminado */
+}
+
+.sith-clash-button:hover {
+  background-color: rgba(236, 77, 88, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(236, 77, 88, 0.2);
+  text-decoration: none; /* Asegurar que no aparezca subrayado al pasar el cursor */
+}
+
+.sith-clash-button i {
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+
+.sith-clash-button:hover i {
+  transform: translateY(-2px);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Navbar para móviles */
+.mobile-navbar {
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(18, 18, 18, 0.95);
+  padding: 8px 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.mobile-navbar a {
+  color: #f5f5f5;
+  font-size: 1.2rem; /* Reducido de 1rem */
+  width: 28px; /* Reducido de 30px */
+  height: 28px; /* Reducido de 30px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+/* Posicionamiento del botón toggle */
+.mobile-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f5f5f5;
+  font-size: 1.4rem;
+  width: 36px;
+  height: 36px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 40px;
+  top: 6px;
+  z-index: 9999;
+}
+
+/* Navbar expandida para móviles */
+/* Estilos para la navbar móvil */
+.mobile-expanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  background-color: #121212;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  padding: 60px 20px 20px;
+}
+
+/* Estilos para los enlaces del menú móvil */
+.mobile-expanded a {
+  color: #f5f5f5 !important;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* Estilo para la cruz de cierre */
+.close-menu {
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  background-color: rgba(236, 77, 88, 0.3); /* Fondo rojo semitransparente para hacerlo visible */
+  border: none;
+  color: #ffffff !important; /* Color blanco para mejor visibilidad */
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex !important; /* Cambiado de block a flex */
+  align-items: center;
+  justify-content: center;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 36px; /* Tamaño definido */
+  height: 36px; /* Tamaño definido */
+  border-radius: 50%; /* Forma circular */
+}
+
+.close-menu:hover {
+  background-color: rgba(236, 77, 88, 0.6); /* Más visible al pasar el cursor */
+}
+
+/* Eliminar las definiciones duplicadas más abajo en el archivo */
+.navbar-links a, 
+.navbar-right a,
+.mobile-navbar a,
+.mobile-expanded a {
+  text-decoration: none;
+}
+
+/* Estilo para la línea roja de The Sith Clash */
+.mobile-sith-expanded {
+  color: #ec4d58 !important;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ec4d58;
+}
+
+.mobile-sith-expanded::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ec4d58;
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .desktop-navbar {
+    display: none;
+  }
+  
+  .mobile-navbar {
+    display: flex;
+  }
+}

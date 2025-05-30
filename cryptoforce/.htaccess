@@ -1,0 +1,18 @@
+RewriteEngine On
+RewriteBase /
+
+# Allow direct access to components directory
+RewriteRule ^components/ - [L]
+
+# If the requested file or directory doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Remove Crypto-Force from URLs if present
+RewriteRule ^Crypto-Force/(.*)$ /$1 [L,R=301]
+
+# Handle direct requests to HTML files
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
