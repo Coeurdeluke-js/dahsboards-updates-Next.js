@@ -21,8 +21,8 @@ export default function LoginPage() {
     try {
       await login(email, password)
       router.push('/') // Redirigir al inicio después del login exitoso
-    } catch (error: any) {
-      setError(error.message || 'Error al iniciar sesión')
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Error al iniciar sesión')
     }
   }
 

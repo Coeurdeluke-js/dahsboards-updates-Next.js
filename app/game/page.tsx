@@ -1,5 +1,6 @@
 'use client';
 
+// Eliminar esta línea:
 import Image from 'next/image';
 import '../styles/game.css';
 

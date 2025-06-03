@@ -77,7 +77,7 @@
   gap: 8px;
   background-color: #ec4d58;
   color: #fafafa;
-  padding: 8px 16px;
+  padding: 10px 20px; /* Aumentado el padding */
   border-radius: 6px;
   font-weight: 600;
   font-size: 0.9rem;
@@ -85,7 +85,7 @@
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
-  width: 60%; /* Reducido de 80% a 60% para que no sean tan anchos */
+  width: 70%; /* Aumentado de 60% a 70% para mantener consistencia con los otros botones */
   margin: 0 auto; /* Mantener centrado */
   white-space: nowrap; /* Evita que el texto se rompa */
 }

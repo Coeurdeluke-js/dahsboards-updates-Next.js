@@ -1,5 +1,0 @@
-179.40.45.155 - - [18/May/2025:13:23:48 -0400] "GET /components/servicios/cursos/practico.html HTTP/1.0" 200 7052 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-179.40.45.155 - - [18/May/2025:13:23:49 -0400] "GET /components/servicios/cursos/ HTTP/1.0" 403 660 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-179.40.45.155 - - [18/May/2025:13:28:51 -0400] "GET /components/intro.html HTTP/1.0" 200 5731 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-179.40.45.155 - - [18/May/2025:13:28:51 -0400] "GET /components/quienessomos.html HTTP/1.0" 200 4860 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-167.172.65.109 - - [18/May/2025:23:57:35 -0400] "GET /sftp-config.json HTTP/1.0" 404 575 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0"

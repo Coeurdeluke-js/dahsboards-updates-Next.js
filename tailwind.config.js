@@ -7,15 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'crypto-dark': '#121212',
-        'crypto-light': '#fafafa',
-        'crypto-red': '#ec4d58',
-        'crypto-red-dark': '#d64550',
-        'crypto-blue': '#3b82f6',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        primary: '#ff6b6b',
+        accent: '#ffd43b',
+        success: '#00ffaa',
       },
     },
   },

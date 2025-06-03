@@ -1,4 +1,5 @@
 'use client';
+// Eliminar esta línea:
 import { useEffect } from 'react';
 import '../styles/quienessomos.css';
 

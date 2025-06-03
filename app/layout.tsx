@@ -49,8 +49,10 @@ export default function RootLayout({
           <div className="triangle-background">
             <div className="triangle-dots"></div>
           </div>
-          <Navbar />
-          {children}
+          <div className="relative z-10"> {/* Add this wrapper */}
+            <Navbar />
+            {children}
+          </div>
         </AuthProvider>
       </body>
     </html>

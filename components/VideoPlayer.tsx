@@ -8,6 +8,7 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ src, poster }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Eliminar esta línea:
   const [showVolumeMessage, setShowVolumeMessage] = useState(true);
 
   useEffect(() => {
@@ -15,12 +16,14 @@ export default function VideoPlayer({ src, poster }: VideoPlayerProps) {
       if (videoRef.current) {
         videoRef.current.muted = false;
         videoRef.current.volume = 0.5;
+        // Y también eliminar esta línea:
         setShowVolumeMessage(false);
       }
     };
 
     const handleVolumeChange = () => {
       if (videoRef.current && !videoRef.current.muted && videoRef.current.volume > 0) {
+        // Y también eliminar esta línea:
         setShowVolumeMessage(false);
       }
     };
