@@ -7,7 +7,6 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
-  // Cerrar menú con tecla Escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
@@ -19,7 +18,6 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isMobileMenuOpen]);
 
-  // Controlar scroll del body
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -32,84 +30,137 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-  };
-
   return (
-    <div id="navbar-container">
-      <nav className="navbar">
-        {/* Desktop Navbar */}
-        <div className="desktop-navbar">
-          <div className="navbar-links">
-            <Link href="/"><i className="fas fa-home"></i> Home</Link>
-            <Link href="/intro"><i className="fas fa-info-circle"></i> Introducción</Link>
-            <Link href="/quienessomos"><i className="fas fa-users"></i> Quiénes Somos</Link>
-            <Link href="/servicios"><i className="fas fa-cogs"></i> Servicios</Link>
-            <Link href="/contacto"><i className="fas fa-envelope"></i> Contacto</Link>
+    <>
+      {/* Mobile Menu Overlay - Black background that covers the entire screen */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-black z-40 md:hidden" />
+      )}
+
+      {/* Navbar Container */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-[#121212] border-b border-white/10">
+        <nav className="max-w-7xl mx-auto px-4 py-3">
+          {/* Desktop Navbar */}
+          <div className="hidden md:flex justify-between items-center">
+            <div className="flex items-center space-x-6">
+              <Link href="/" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-home mr-2"></i> Home
+              </Link>
+              <Link href="/intro" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-info-circle mr-2"></i> Introducción
+              </Link>
+              <Link href="/quienessomos" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-users mr-2"></i> Quiénes Somos
+              </Link>
+              <Link href="/servicios" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-cogs mr-2"></i> Servicios
+              </Link>
+              <Link href="/contacto" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-envelope mr-2"></i> Contacto
+              </Link>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Link href="/game" className="bg-[#ec4d58] text-white px-4 py-2 rounded-lg hover:bg-[#d93f4a] transition-colors">
+                <i className="fas fa-bolt mr-2"></i> The Siths Clash
+              </Link>
+              {user && (
+                <div className="flex items-center space-x-4">
+                  <Link href="/perfil" className="text-white hover:text-[#ec4d58] transition-colors">Perfil</Link>
+                  <button 
+                    onClick={logout}
+                    className="text-white hover:text-[#ec4d58] transition-colors"
+                  >
+                    Cerrar Sesión
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           
-          <div className="navbar-right">
-            <Link href="/game" className="sith-clash-button">
-              <i className="fas fa-bolt"></i> The Siths Clash
-            </Link>
-            {user && (
-              <div className="user-menu">
-                <Link href="/perfil">Perfil</Link>
-                <button onClick={logout}>Cerrar Sesión</button>
-              </div>
-            )}
+          {/* Mobile Navbar */}
+          <div className="md:hidden flex justify-between items-center">
+            <div className="flex items-center space-x-6">
+              <Link href="/" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-home text-xl"></i>
+              </Link>
+              <Link href="/intro" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-info-circle text-xl"></i>
+              </Link>
+              <Link href="/quienessomos" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-users text-xl"></i>
+              </Link>
+              <Link href="/servicios" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-cogs text-xl"></i>
+              </Link>
+              <Link href="/contacto" className="text-white hover:text-[#ec4d58] transition-colors">
+                <i className="fas fa-envelope text-xl"></i>
+              </Link>
+              <Link href="/game" className="text-[#ec4d58] hover:text-white transition-colors">
+                <i className="fas fa-bolt text-xl"></i>
+              </Link>
+            </div>
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-white hover:text-[#ec4d58] transition-colors ml-4"
+            >
+              <i className="fas fa-bars text-xl"></i>
+            </button>
           </div>
-        </div>
-        
-        {/* Mobile Navbar */}
-        <div className="mobile-navbar">
-          <Link href="/"><i className="fas fa-home"></i></Link>
-          <Link href="/intro"><i className="fas fa-info-circle"></i></Link>
-          <Link href="/quienessomos"><i className="fas fa-users"></i></Link>
-          <Link href="/servicios"><i className="fas fa-cogs"></i></Link>
-          <Link href="/contacto"><i className="fas fa-envelope"></i></Link>
-          <button 
-            id="mobile-menu-toggle" 
-            className="mobile-toggle"
-            onClick={toggleMobileMenu}
-          >
-            <i className="fas fa-bars"></i>
-          </button>
-        </div>
-        
-        {/* Mobile Expanded Menu */}
-        <div 
-          className="mobile-expanded" 
-          style={{ display: isMobileMenuOpen ? 'flex' : 'none' }}
-        >
-          <button className="close-menu" onClick={closeMobileMenu}>
-            <i className="fas fa-times"></i>
-          </button>
-          <Link href="/" onClick={closeMobileMenu}>
-            <i className="fas fa-home"></i> Home
-          </Link>
-          <Link href="/intro" onClick={closeMobileMenu}>
-            <i className="fas fa-info-circle"></i> Introducción
-          </Link>
-          <Link href="/quienessomos" onClick={closeMobileMenu}>
-            <i className="fas fa-users"></i> Quiénes Somos
-          </Link>
-          <Link href="/servicios" onClick={closeMobileMenu}>
-            <i className="fas fa-cogs"></i> Servicios
-          </Link>
-          <Link href="/contacto" onClick={closeMobileMenu}>
-            <i className="fas fa-envelope"></i> Contacto
-          </Link>
-          <Link href="/game" className="mobile-sith-expanded" onClick={closeMobileMenu}>
-            <i className="fas fa-bolt"></i> The Siths Clash
-          </Link>
-        </div>
-      </nav>
-    </div>
+
+          {/* Mobile Menu Content */}
+          {isMobileMenuOpen && (
+            <div className="absolute inset-x-0 top-full z-50 md:hidden">
+              <div className="bg-[#121212] border-t border-white/10">
+                <div className="flex flex-col items-center space-y-6 py-8">
+                  <Link 
+                    href="/" 
+                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="fas fa-home text-xl"></i> Home
+                  </Link>
+                  <Link 
+                    href="/intro" 
+                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="fas fa-info-circle text-xl"></i> Introducción
+                  </Link>
+                  <Link 
+                    href="/quienessomos" 
+                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="fas fa-users text-xl"></i> Quiénes Somos
+                  </Link>
+                  <Link 
+                    href="/servicios" 
+                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="fas fa-cogs text-xl"></i> Servicios
+                  </Link>
+                  <Link 
+                    href="/contacto" 
+                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="fas fa-envelope text-xl"></i> Contacto
+                  </Link>
+                  <Link 
+                    href="/game" 
+                    className="bg-[#ec4d58] text-white px-6 py-3 rounded-lg text-xl hover:bg-[#d93f4a] transition-colors flex items-center gap-3"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <i className="fas fa-bolt text-xl"></i> The Siths Clash
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+        </nav>
+      </div>
+    </>
   );
 }

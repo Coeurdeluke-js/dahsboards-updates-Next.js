@@ -1,11 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Exo_2 } from 'next/font/google'
 import './globals.css'
-import './styles/intro.css'
-import './styles/navbar.css'
-import './styles/servicios.css'
-import './styles/quienessomos.css'
-import './styles/contacto.css'
 import Navbar from '@/components/layout/Navbar'
 import { AuthProvider } from '@/context/AuthContext'
 

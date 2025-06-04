@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import '../styles/servicios.css';
 
 const servicios = [
   {
@@ -34,17 +33,17 @@ const servicios = [
 
 export default function ServiciosPage() {
   return (
-    <div className="min-h-screen pt-20">
-      <div className="servicios-container">
-        <h1>Nuestros Servicios</h1>
+    <div className="min-h-screen pt-24 bg-gradient-to-b from-[#212121] via-[#121212] to-[#212121]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 className="text-4xl font-bold text-center text-white mb-12">Nuestros Servicios</h1>
         
-        <div className="servicios-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {servicios.map((servicio, index) => (
-            <div key={index} className="servicio-card">
-              <i className={`${servicio.icon} service-icon`}></i>
-              <h3 className="service-title">{servicio.title}</h3>
-              <p className="service-description">{servicio.description}</p>
-              <Link href={servicio.link} className="service-button">
+            <div key={index} className="bg-[#1e1e1e] rounded-xl p-6 shadow-lg transform hover:scale-105 transition-transform duration-300">
+              <i className={`${servicio.icon} text-4xl text-[#ec4d58] mb-4 block`}></i>
+              <h3 className="text-xl font-bold text-white mb-3">{servicio.title}</h3>
+              <p className="text-gray-300 mb-6 text-sm leading-relaxed">{servicio.description}</p>
+              <Link href={servicio.link} className="inline-flex items-center gap-2 px-4 py-2 bg-[#2a2a2a] text-white rounded-lg hover:bg-[#3a3a3a] transition-all duration-300 text-sm">
                 <i className="fas fa-arrow-right"></i>
                 <span>{servicio.buttonText}</span>
               </Link>

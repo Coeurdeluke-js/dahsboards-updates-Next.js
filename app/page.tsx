@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import { useEffect } from 'react';
-// Remove all CSS imports
 
 export default function HomePage() {
   useEffect(() => {
@@ -25,26 +24,23 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="h-screen bg-gradient-to-b from-[#212121] via-[#121212] to-[#212121] overflow-x-hidden">
+    <div className="h-screen bg-gradient-to-b from-[#212121] via-[#121212] to-[#121212] overflow-x-hidden">
       <div className="absolute inset-0 bg-triangle-pattern opacity-20"></div>
       <div className="relative">
-        {/**
-         * Aquí he añadido:
-         *  - overflow-y-auto: para que <main> pueda scrollear si de pronto
-         *    el contenido excede ligeramente el viewport.
-         *  - scrollbar personalizado: ver parte 2 abajo.
-         */}
-        <main className="flex flex-col md:flex-row justify-between items-center md:items-start p-4 md:p-[60px_30px_30px] gap-4 md:gap-6 h-full relative overflow-y-auto scrollbar-thin scrollbar-thumb-[#ec4d58] scrollbar-track-[#121212]">
-          {/* ================================================================= */}
+      <main className="text-white flex flex-col md:flex-row justify-center items-start p-4 md:p-[60px_30px_30px] gap-6 md:gap-32 h-full relative overflow-y-auto scrollbar-thin scrollbar-thumb-[#ec4d58] scrollbar-track-[#121212]">
+
+
+
           {/* Contenido izquierdo: Logo + botones */}
-          <div className="w-full md:w-5/12 max-w-[500px] px-4 md:px-0 flex flex-col items-center mt-4 md:mt-8">
-            <div className="flex justify-center items-center mx-auto mb-4 md:mb-4 max-w-[280px] md:max-w-[350px]">
+          <div className="w-full md:w-1/3 max-w-[800px] px-4 md:px-0 flex flex-col items-center mt-4 md:mt-8">
+            {/* Ajuste de tamaño del logo */}
+            <div className="flex justify-center items-center mx-auto mb-4 md:mb-4 max-w-[200px] md:max-w-[420px]">
               <Image
                 src="/logo.png"
                 alt="Crypto Force Logo"
                 className="w-full h-auto filter drop-shadow-md hover:scale-101 transition-transform duration-300"
-                width={450}
-                height={225}
+                width={700}
+                height={400}
                 priority={true}
               />
             </div>
@@ -64,7 +60,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* ================================================================= */}
           {/* Contenido derecho: Card “Curso Premium” */}
           <div className="w-full md:w-7/12 max-w-[600px] px-4 md:px-0 mt-4 md:mt-8">
             <div className="bg-[#1e1e1e] rounded-xl p-4 md:p-6 shadow-md">
@@ -75,34 +70,33 @@ export default function HomePage() {
                 </span>
               </div>
 
-              {/** Aquí he añadido “list-none marker:hidden” para quitar cualquier marcador */}
-              <ul className="feature-list list-none marker:hidden space-y-1 text-sm md:text-sm leading-snug">
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+              <ul className="space-y-1 text-sm md:text-sm leading-snug ">
+                <li className="flex items-start gap-2">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>Acceso inmediato a formación grabada.</span>
                 </li>
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+                <li className="flex items-start gap-2 ">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>15 días de período de prueba.</span>
                 </li>
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+                <li className="flex items-start gap-2">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>Videos exclusivos con las claves que marcan la diferencia.</span>
                 </li>
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+                <li className="flex items-start gap-2">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>Resolución de dudas personalizada.</span>
                 </li>
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+                <li className="flex items-start gap-2">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>Clases en vivo periódicas para resolver dudas.</span>
                 </li>
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+                <li className="flex items-start gap-2">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>A partir del día 16 se desbloquea el 100% del contenido.</span>
                 </li>
-                <li className="feature-item flex items-start gap-2">
-                  <span className="flex-shrink-0">✅</span>
+                <li className="flex items-start gap-2">
+                  <i className="fas fa-check text-green-400 mt-1"></i>
                   <span>Acceso ilimitado a la plataforma.</span>
                 </li>
               </ul>
@@ -111,21 +105,21 @@ export default function HomePage() {
                 <h3 className="text-[#ffd700] font-bold mb-2 text-sm md:text-base">
                   🎁 BONUS INCLUIDOS:
                 </h3>
-                <ul className="feature-list list-none marker:hidden space-y-1 text-sm md:text-sm leading-snug">
-                  <li className="feature-item flex items-start gap-2">
-                    <span className="flex-shrink-0">📚</span>
+                <ul className="space-y-1 text-sm md:text-sm leading-snug">
+                  <li className="flex items-start gap-2">
+                    <i className="fas fa-book text-yellow-400 mt-1"></i>
                     <span>Curso completo Introducción a las cripto</span>
                   </li>
-                  <li className="feature-item flex items-start gap-2">
-                    <span className="flex-shrink-0">📚</span>
+                  <li className="flex items-start gap-2">
+                    <i className="fas fa-book text-yellow-400 mt-1"></i>
                     <span>Master class exclusivas</span>
                   </li>
-                  <li className="feature-item flex items-start gap-2">
-                    <span className="flex-shrink-0">📚</span>
+                  <li className="flex items-start gap-2">
+                    <i className="fas fa-book text-yellow-400 mt-1"></i>
                     <span>Curso Psicología del trading</span>
                   </li>
-                  <li className="feature-item flex items-start gap-2">
-                    <span className="flex-shrink-0">📚</span>
+                  <li className="flex items-start gap-2">
+                    <i className="fas fa-book text-yellow-400 mt-1"></i>
                     <span>Resúmenes de libros especializados</span>
                   </li>
                 </ul>
@@ -145,7 +139,7 @@ export default function HomePage() {
                 </div>
 
                 <button className="w-full py-2 bg-[#ec4d58] text-white font-bold rounded-lg hover:bg-[#d43d47] transition-colors text-sm md:text-base">
-                  🚀 INSCRÍ BETE AHORA
+                  🚀 INSCRÍBETE AHORA
                 </button>
                 <button className="w-full py-2 bg-[#2a2a2a] text-white font-bold rounded-lg hover:bg-[#3a3a3a] transition-colors text-sm md:text-base">
                   📋 VER TEMARIO
