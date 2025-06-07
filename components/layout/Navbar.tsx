@@ -1,166 +1,201 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import clsx from 'clsx';
+
+const mainLinks = [
+  { href: '/', label: 'Home', icon: 'fas fa-home' },
+  { href: '/intro', label: 'Introducción', icon: 'fas fa-info-circle' },
+  { href: '/quienessomos', label: 'Quiénes Somos', icon: 'fas fa-users' },
+  { href: '/servicios', label: 'Servicios', icon: 'fas fa-cogs' },
+  { href: '/contacto', label: 'Contacto', icon: 'fas fa-envelope' },
+];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-    
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isMobileMenuOpen]);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
   }, [isMobileMenuOpen]);
 
   return (
     <>
-      {/* Mobile Menu Overlay - Black background that covers the entire screen */}
+      {/* Fondo oscuro + blur */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black z-40 md:hidden" />
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md z-40 animate-fadeIn"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
       )}
 
-      {/* Navbar Container */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-[#121212] border-b border-white/10">
-        <nav className="max-w-7xl mx-auto px-4 py-3">
-          {/* Desktop Navbar */}
-          <div className="hidden md:flex justify-between items-center">
-            <div className="flex items-center space-x-6">
-              <Link href="/" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-home mr-2"></i> Home
-              </Link>
-              <Link href="/intro" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-info-circle mr-2"></i> Introducción
-              </Link>
-              <Link href="/quienessomos" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-users mr-2"></i> Quiénes Somos
-              </Link>
-              <Link href="/servicios" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-cogs mr-2"></i> Servicios
-              </Link>
-              <Link href="/contacto" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-envelope mr-2"></i> Contacto
-              </Link>
+      {/* NAVBAR SUPERIOR */}
+      <div className="fixed top-0 left-0 right-0 z-50 border-b border-[#ec4d58]/20 rounded-b-2xl overflow-hidden">
+        <div className="absolute inset-0 animate-light-wave z-0" />
+
+        <nav className="relative w-full bg-[#121212]/90 backdrop-blur-md flex justify-between items-center px-6 py-3 max-w-full z-50">
+          <div className="flex justify-between items-center max-w-7xl w-full mx-auto">
+
+            {/* NAV DESKTOP */}
+            <div className="hidden md:flex space-x-8 items-center z-10">
+              {mainLinks.map(({ href, label, icon }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="text-white hover:text-[#ec4d58] transition-colors flex items-center gap-2 font-semibold"
+                >
+                  <i className={`${icon}`}></i> {label}
+                </Link>
+              ))}
             </div>
-            
-            <div className="flex items-center space-x-4">
-              <Link href="/game" className="bg-[#ec4d58] text-white px-4 py-2 rounded-lg hover:bg-[#d93f4a] transition-colors">
-                <i className="fas fa-bolt mr-2"></i> The Siths Clash
+
+            {/* BOTONES EXTRA DESKTOP */}
+            <div className="hidden md:flex items-center space-x-6 z-10">
+              <Link
+                href="/game"
+                className="relative inline-flex items-center gap-2 rounded-lg bg-gradient-to-tr from-[#ec4d58] via-[#c6373e] to-[#ec4d58] px-5 py-2 shadow-lg text-white font-semibold text-sm transition-all hover:brightness-110 border border-[#ec4d58]"
+              >
+                <i className="fas fa-bolt"></i> The Siths Clash
               </Link>
               {user && (
-                <div className="flex items-center space-x-4">
-                  <Link href="/perfil" className="text-white hover:text-[#ec4d58] transition-colors">Perfil</Link>
-                  <button 
+                <>
+                  <Link href="/perfil" className="text-white hover:text-[#ec4d58] font-semibold">
+                    Perfil
+                  </Link>
+                  <button
                     onClick={logout}
-                    className="text-white hover:text-[#ec4d58] transition-colors"
+                    className="text-white hover:text-[#ec4d58] font-semibold"
                   >
                     Cerrar Sesión
                   </button>
-                </div>
+                </>
               )}
             </div>
-          </div>
-          
-          {/* Mobile Navbar */}
-          <div className="md:hidden flex justify-between items-center">
-            <div className="flex items-center space-x-6">
-              <Link href="/" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-home text-xl"></i>
-              </Link>
-              <Link href="/intro" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-info-circle text-xl"></i>
-              </Link>
-              <Link href="/quienessomos" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-users text-xl"></i>
-              </Link>
-              <Link href="/servicios" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-cogs text-xl"></i>
-              </Link>
-              <Link href="/contacto" className="text-white hover:text-[#ec4d58] transition-colors">
-                <i className="fas fa-envelope text-xl"></i>
-              </Link>
-              <Link href="/game" className="text-[#ec4d58] hover:text-white transition-colors">
-                <i className="fas fa-bolt text-xl"></i>
-              </Link>
-            </div>
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:text-[#ec4d58] transition-colors ml-4"
-            >
-              <i className="fas fa-bars text-xl"></i>
-            </button>
-          </div>
 
-          {/* Mobile Menu Content */}
-          {isMobileMenuOpen && (
-            <div className="absolute inset-x-0 top-full z-50 md:hidden">
-              <div className="bg-[#121212] border-t border-white/10">
-                <div className="flex flex-col items-center space-y-6 py-8">
-                  <Link 
-                    href="/" 
-                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
-                    onClick={() => setIsMobileMenuOpen(false)}
+            {/* NAV COLAPSADA MÓVIL */}
+            <div className={clsx("md:hidden flex items-center justify-between w-full z-10 transition-opacity duration-300", {
+              'opacity-0 pointer-events-none': isMobileMenuOpen,
+              'opacity-100': !isMobileMenuOpen,
+            })}>
+              <div className="flex gap-4 items-center">
+                {mainLinks.map(({ href, icon }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="text-white hover:text-[#ec4d58] text-xl"
                   >
-                    <i className="fas fa-home text-xl"></i> Home
+                    <i className={icon}></i>
                   </Link>
-                  <Link 
-                    href="/intro" 
-                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <i className="fas fa-info-circle text-xl"></i> Introducción
-                  </Link>
-                  <Link 
-                    href="/quienessomos" 
-                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <i className="fas fa-users text-xl"></i> Quiénes Somos
-                  </Link>
-                  <Link 
-                    href="/servicios" 
-                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <i className="fas fa-cogs text-xl"></i> Servicios
-                  </Link>
-                  <Link 
-                    href="/contacto" 
-                    className="text-white text-xl hover:text-[#ec4d58] transition-colors flex items-center gap-3"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <i className="fas fa-envelope text-xl"></i> Contacto
-                  </Link>
-                  <Link 
-                    href="/game" 
-                    className="bg-[#ec4d58] text-white px-6 py-3 rounded-lg text-xl hover:bg-[#d93f4a] transition-colors flex items-center gap-3"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    <i className="fas fa-bolt text-xl"></i> The Siths Clash
-                  </Link>
-                </div>
+                ))}
+                <Link href="/game" className="text-[#ec4d58] hover:text-white text-xl">
+                  <i className="fas fa-bolt"></i>
+                </Link>
               </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="ml-4 text-white hover:text-[#ec4d58]"
+              >
+                <i className="fas fa-bars text-2xl"></i>
+              </button>
             </div>
-          )}
+          </div>
         </nav>
       </div>
+
+      {/* NAVBAR MÓVIL DESPLEGADA */}
+      {isMobileMenuOpen && (
+        <div
+          className={clsx(
+            'fixed top-0 left-0 right-0 z-[60] bg-[#1a1a1a]/95 backdrop-blur-md border-t border-[#ec4d58]/30 shadow-2xl animate-slideFadeInDown',
+            'flex flex-col gap-4 px-6 pt-24 pb-8 min-h-screen'
+          )}
+        >
+          {mainLinks.map(({ href, label, icon }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center gap-4 text-white hover:text-[#ec4d58] text-lg px-4 py-2 rounded-md transition-all"
+            >
+              <i className={`${icon} text-2xl w-8 text-center`}></i>
+              <span className="font-semibold tracking-wide">{label}</span>
+            </Link>
+          ))}
+
+          <Link
+            href="/game"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-4 bg-gradient-to-tr from-[#ec4d58] via-[#c6373e] to-[#ec4d58] text-white px-5 py-3 rounded-lg font-semibold border border-[#ec4d58] shadow-lg transition-all hover:brightness-110"
+          >
+            <i className="fas fa-bolt text-2xl w-8 text-center"></i>
+            The Siths Clash
+          </Link>
+
+          {/* BOTÓN COLAPSAR */}
+          <button
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="mt-6 flex items-center justify-center text-white hover:text-[#ec4d58] text-sm gap-2 border border-[#ec4d58]/30 rounded-lg px-4 py-2 transition-all"
+          >
+            <i className="fas fa-chevron-up"></i> Cerrar Menú
+          </button>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes lightWave {
+          0% {
+            transform: translateX(-100%);
+            opacity: 0.1;
+          }
+          50% {
+            transform: translateX(0%);
+            opacity: 0.2;
+          }
+          100% {
+            transform: translateX(100%);
+            opacity: 0.1;
+          }
+        }
+
+        .animate-light-wave {
+          background: radial-gradient(
+            circle at 30% 50%,
+            rgba(236, 77, 88, 0.1),
+            transparent 60%
+          );
+          animation: lightWave 6s ease-in-out infinite;
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes slideFadeInDown {
+          from {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-slideFadeInDown {
+          animation: slideFadeInDown 0.4s ease-out forwards;
+        }
+      `}</style>
     </>
   );
 }
