@@ -49,7 +49,7 @@ export default function IntroPage() {
 
           <p>
             Sabemos que el mundo de las criptomonedas puede parecer <strong>confuso</strong>, incluso <strong>intimidante</strong>, 
-            pero no tiene por qué serlo. Nuestro propósito con <strong>Crypto Force</strong> es <strong>acercar ese mundo</strong> 
+            pero no tiene por qué serlo. Nuestro propósito con <strong>Crypto Force</strong> es <strong>acercar ese mundo</strong>  
             a las personas de forma <strong>accesible, comprensible y humana</strong>.
             Queremos crear un espacio donde no solo adquiramos habilidades, sino donde también 
             <strong> compartamos experiencias</strong>, aprendamos de nuestros errores y <strong>celebremos nuestros logros</strong>.
