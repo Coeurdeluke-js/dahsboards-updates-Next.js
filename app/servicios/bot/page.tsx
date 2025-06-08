@@ -8,7 +8,7 @@ export default function BotTradingPage() {
 
   return (
     <div className="min-h-screen pt-20 px-4 md:px-8 bg-gradient-to-b from-[#212121] via-[#121212] to-[#121212] overflow-x-hidden">
-       <div className="max-w-4xl mx-auto py-8">
+      <div className="max-w-4xl mx-auto py-8">
         <section className="space-y-8">
           <h1 className="text-4xl font-bold text-white text-center mb-8">
             Bot de Trading
@@ -59,7 +59,7 @@ export default function BotTradingPage() {
                 <li>
                   <strong>Renovación:</strong> Cada mes se comparte el 30% de las ganancias obtenidas en ese período
                 </li>
-                <li>El capital a operar debe estar en el apartado "Trading" del exchange</li>
+                <li>El capital a operar debe estar en el apartado &quot;Trading&quot; del exchange</li>
               </ul>
             </div>
 
