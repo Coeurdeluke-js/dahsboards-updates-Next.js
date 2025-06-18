@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import clsx from 'clsx';
+import RoleSelector from './RoleSelector';
 
 const mainLinks = [
   { href: '/', label: 'Home', icon: 'fas fa-home' },
@@ -13,8 +14,18 @@ const mainLinks = [
   { href: '/contacto', label: 'Contacto', icon: 'fas fa-envelope' },
 ];
 
+const roles = [
+  { id: 'iniciado', name: 'Iniciado', level: 'I', color: 'text-white', path: '/dashboard/iniciado' },
+  { id: 'acolito', name: 'Acólito', level: 'II', color: 'text-yellow-400', path: '/dashboard/acolito' },
+  { id: 'warrior', name: 'Warrior', level: 'III', color: 'text-green-400', path: '/dashboard/warrior' },
+  { id: 'lord', name: 'Lord', level: 'IV', color: 'text-blue-400', path: '/dashboard/lord' },
+  { id: 'darth', name: 'Darth', level: 'V', color: 'text-red-500', path: '/dashboard/darth' },
+  { id: 'maestro', name: 'Maestro', level: 'VI', color: 'text-gray-900', path: '/dashboard/maestro' },
+];
+
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isRoleMenuOpen, setIsRoleMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
   useEffect(() => {
@@ -51,6 +62,22 @@ export default function Navbar() {
               ))}
             </div>
 
+            <div className="flex items-center space-x-4">
+              {user ? (
+                <>
+                  <RoleSelector />
+                  <button
+                    onClick={logout}
+                    className="text-white hover:text-[#ec4d58] transition-colors"
+                  >
+                    Cerrar Sesión
+                  </button>
+                </>
+              ) : (
+                <RoleSelector />
+              )}
+            </div>
+
             {/* BOTONES EXTRA DESKTOP */}
             <div className="hidden md:flex items-center space-x-6 z-10">
               <Link
@@ -80,16 +107,21 @@ export default function Navbar() {
               'opacity-100': !isMobileMenuOpen,
             })}>
               <div className="flex gap-4 items-center">
-                {mainLinks.map(({ href, icon }) => (
+                {mainLinks.map(({ href, icon, label }) => (
                   <Link
                     key={href}
                     href={href}
-                    className="text-white hover:text-[#ec4d58] text-xl"
+                    className="text-white hover:text-[#ec4d58] text-xl relative group"
+                    title={label}
                   >
                     <i className={icon}></i>
                   </Link>
                 ))}
-                <Link href="/game" className="text-[#ec4d58] hover:text-white text-xl">
+                <Link 
+                  href="/game" 
+                  className="text-[#ec4d58] hover:text-white text-xl" 
+                  title="The Siths Clash"
+                >
                   <i className="fas fa-bolt"></i>
                 </Link>
               </div>
@@ -112,6 +144,37 @@ export default function Navbar() {
             'flex flex-col gap-4 px-6 pt-24 pb-8 min-h-screen'
           )}
         >
+          {/* Agregar el botón de inicio de sesión para mobile */}
+          {!user && (
+            <div className="w-full">
+              <button
+                onClick={() => setIsRoleMenuOpen(!isRoleMenuOpen)}
+                className="w-full bg-[#ec4d58] text-white px-4 py-3 rounded-lg hover:bg-[#ec4d58]/80 transition-colors flex items-center justify-center gap-2"
+              >
+                <i className="fas fa-sign-in-alt"></i>
+                Iniciar Sesión
+              </button>
+
+              {isRoleMenuOpen && (
+                <div className="mt-2 w-full bg-[#121212] border border-[#ec4d58]/20 rounded-lg shadow-lg py-1 z-[70]">
+                  {roles.map((role) => (
+                    <Link
+                      key={role.id}
+                      href={role.path}
+                      className={`flex items-center space-x-3 px-4 py-3 hover:bg-[#ec4d58]/10 transition-colors ${role.color}`}
+                      onClick={() => {
+                        setIsRoleMenuOpen(false);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      <span className="font-bold">{role.level}</span>
+                      <span className="flex-1">{role.name}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
           {mainLinks.map(({ href, label, icon }) => (
             <Link
               key={href}

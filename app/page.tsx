@@ -28,7 +28,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="h-screen bg-gradient-to-b from-[#212121] via-[#121212] to-[#121212] overflow-x-hidden">
+    <div className="h-screen bg-gradient-to-b from-[#212121] via-[#121212] to-[#121212] overflow-x-hidden relative z-0">
       <div className="relative">
         <main className="text-white flex flex-col md:flex-row justify-center items-start p-4 md:p-[60px_30px_30px] gap-6 md:gap-12 h-full relative overflow-y-auto scrollbar-thin scrollbar-thumb-[#ec4d58] scrollbar-track-[#121212]">
 
@@ -108,16 +108,16 @@ export default function HomePage() {
             <div className="relative z-10 bg-[#121212] border border-[#10d7be]/10 rounded-2xl px-6 py-6 flex flex-col gap-4 shadow-xl transition-all duration-300">
               <div className="flex flex-col text-left">
               <p className="text-base text-gray-300">
-  Tenemos una <strong className="text-[#10d7be]">alianza explosiva</strong> con{' '}
-  <Image
-    src="/images/ZoomEx-logo.png"
-    alt="Zoomex Logo"
-    width={100}
-    height={28}
-    className="inline-block align-middle -ml-2"
-    priority
-  />
-</p>
+                Tenemos una <strong className="text-[#10d7be]">alianza explosiva</strong> con{' '}
+                <Image
+                  src="/images/zoomex-logo.png"
+                  alt="Zoomex Logo"
+                  width={100}
+                  height={28}
+                  className="inline-block align-middle -ml-2"
+                  priority
+                />
+              </p>
 
                 <p className="text-base text-gray-300">
                   Haz click{' '}
