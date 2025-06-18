@@ -5,6 +5,7 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 import BackButton from '@/components/ui/BackButton';
 import Image from 'next/image';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import TimeZoneClock from '@/components/ui/TimeZoneClock';
 
 export default function FundamentosCryptoIntro() {
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function FundamentosCryptoIntro() {
     <div className="min-h-screen bg-[rgb(var(--background))] text-[rgb(var(--foreground))] overflow-x-hidden">
       <div className="max-w-7xl mx-auto space-y-8 pt-20">
         {/* Header idéntico al dashboard */}
+        {/* Header idéntico al dashboard */}
         <header className="card flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full overflow-hidden shadow-md">
@@ -57,7 +59,10 @@ export default function FundamentosCryptoIntro() {
               <p className="text-gray-600 dark:text-gray-400">Rango: Iniciado</p>
             </div>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-6">
+            <TimeZoneClock />
+            <ThemeToggle />
+          </div>
         </header>
 
         <div className="card relative">

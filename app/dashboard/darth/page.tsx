@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClientComponentClient, User } from '@supabase/auth-helpers-nextjs';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 import { useRouter } from 'next/navigation';
 
 export default function DarthDashboard() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const supabase = createClientComponentClient();
 
   // Temporalmente comentamos la verificación de autenticación mientras se configura
@@ -49,10 +49,12 @@ export default function DarthDashboard() {
       <div className="p-6 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <img 
+            <Image 
               src={user?.user_metadata?.avatar_url || '/images/default-avatar.png'} 
               alt="Avatar" 
-              className="w-10 h-10 rounded-full"
+              width={40}
+              height={40}
+              className="rounded-full"
             />
             <div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">
