@@ -53,17 +53,16 @@ export default function TimeZoneClock() {
       <select
         value={selectedZone}
         onChange={(e) => setSelectedZone(e.target.value)}
-        className="bg-transparent border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#ec4d58] dark:focus:ring-opacity-50"
-      >
+        className="bg-transparent border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#ec4d58] dark:focus:ring-opacity-50 text-[rgb(var(--foreground))]">
         {timeZones.map((zone) => (
-          <option key={zone.value} value={zone.value}>
+          <option key={zone.value} value={zone.value} className="bg-[rgb(var(--background))] text-[rgb(var(--foreground))]">
             {zone.label}
           </option>
         ))}
       </select>
       <div className="text-sm">
-        <div className="font-medium">{formattedTime}</div>
-        <div className="text-gray-500 dark:text-gray-400 capitalize">{formattedDate}</div>
+        <div className="font-medium text-[rgb(var(--foreground))]">{formattedTime}</div>
+        <div className="text-[rgb(var(--foreground))] opacity-80 capitalize">{formattedDate}</div>
       </div>
     </div>
   );

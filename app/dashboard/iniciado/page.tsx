@@ -4,15 +4,56 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import ThemeToggle from '@/components/ui/ThemeToggle';
+import TimeZoneClock from '@/components/ui/TimeZoneClock';
+
+// Definir los tips antes de usarlos
+const tips = [
+  "Mantén un diario de trading para registrar tus operaciones",
+  "Establece límites claros de pérdidas antes de operar",
+  "No inviertas más de lo que puedas permitirte perder",
+  "Estudia el análisis técnico y fundamental",
+  "La paciencia es clave en el trading",
+  "El miedo es el camino hacia el lado oscuro del trading...",
+  "La paciencia es la clave del éxito en el trading...",
+  "El conocimiento es poder en el mundo crypto...",
+  "La disciplina es el puente entre metas y logros..."
+];
+
+// Función para normalizar texto
+const normalizeText = (text) => {
+  return text
+    .toLowerCase()
+    .replace(/ /g, '-')
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+};
+
+// Función para obtener el mensaje de desbloqueo
+const getUnlockMessage = (index) => {
+  switch(index) {
+    case 1:
+      return "Completa el módulo 1 para desbloquear este módulo";
+    case 2:
+      return "Completa el módulo 2 para desbloquear este módulo";
+    case 3:
+      return "Completa el módulo 3 para desbloquear este módulo";
+    default:
+      return "Completa el módulo anterior para desbloquear este módulo";
+  }
+};
 
 const IniciadoDashboard = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
   const [moduleUnlocked, setModuleUnlocked] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('moduleUnlocked');
-      return saved ? JSON.parse(saved) : false;
+      const module2Unlocked = localStorage.getItem('moduleUnlocked');
+      const module3Unlocked = localStorage.getItem('module3Unlocked');
+      return {
+        module2: module2Unlocked ? JSON.parse(module2Unlocked) : false,
+        module3: module3Unlocked ? JSON.parse(module3Unlocked) : false
+      };
     }
-    return false;
+    return { module2: false, module3: false };
   });
   const [tipDelDia, setTipDelDia] = useState('');
   const checklistOrder = [
@@ -24,7 +65,7 @@ const IniciadoDashboard = () => {
   const [loading, setLoading] = useState(true);
   const supabase = createClientComponentClient();
   const videoRef = useRef(null);
-  const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState<number[]>([]);
   const [showIntro, setShowIntro] = useState(false);
 
   useEffect(() => {
@@ -44,11 +85,6 @@ const IniciadoDashboard = () => {
     setTipDelDia(randomTip);
   }, [supabase]);
 
-  const handleCheckboxChange = async (key) => {
-    const newValue = !checklist[key];
-    setChecklist(prev => ({ ...prev, [key]: newValue }));
-  };
-
   const progress = (Object.values(checklist).filter(Boolean).length / Object.keys(checklist).length) * 100;
 
   if (loading) {
@@ -63,7 +99,7 @@ const IniciadoDashboard = () => {
     <div className="min-h-screen bg-[rgb(var(--background))] text-[rgb(var(--foreground))] overflow-x-hidden">
       <div className="max-w-7xl mx-auto space-y-8 pt-20">
         {/* HEADER */}
-        <header className="card flex items-center justify-between ">
+        <header className="card flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full overflow-hidden shadow-md">
               <Image 
@@ -80,7 +116,10 @@ const IniciadoDashboard = () => {
               <p className="text-gray-600 dark:text-gray-400">Rango: Iniciado</p>
             </div>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-4">
+            <TimeZoneClock />
+            <ThemeToggle />
+          </div>
         </header>
 
         {/* BIENVENIDA */}
@@ -94,7 +133,7 @@ const IniciadoDashboard = () => {
               poster="/images/intro-poster.png"
               preload="metadata"
               onTimeUpdate={e => {
-                const video = e.target;
+                const video = e.target as HTMLVideoElement;
                 const current = Math.floor(video.currentTime);
                 setWatched(prev => prev.includes(current) ? prev : [...prev, current]);
                 if (video.duration && watched.length / video.duration > 0.98 && !checklist.video) {
@@ -114,17 +153,28 @@ const IniciadoDashboard = () => {
           <h2 className="text-xl font-bold mb-4">📘 Módulos de Exploración</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {["Fundamentos Crypto", "Análisis Básico", "Gestión de Riesgo", "Psicología"].map((modulo, index) => {
-              const isUnlocked = index === 0 || (index === 1 && moduleUnlocked);
+              const isUnlocked = index === 0 || 
+                (index === 1 && moduleUnlocked.module2) || 
+                (index === 2 && moduleUnlocked.module3);
+
               return (
-                <div key={index} className={`module-card p-4 rounded-lg shadow-md ${isUnlocked ? 'bg-white dark:bg-[#232323] border-2 border-[#ec4d58] cursor-pointer' : 'bg-gray-200 dark:bg-[#181818] opacity-60 cursor-not-allowed'}`}>
+                <div key={index} 
+                     className={`module-card p-4 rounded-lg shadow-md relative group ${isUnlocked ? 'bg-white dark:bg-[#232323] border-2 border-[#ec4d58] cursor-pointer' : 'bg-gray-200 dark:bg-[#181818] opacity-60 cursor-not-allowed'}`}>
                   <h3 className="font-semibold">{modulo}</h3>
                   <p className="text-sm mt-2 text-gray-600 dark:text-gray-400">
                     {`Módulo ${index + 1} - ${isUnlocked ? 'Desbloqueado' : 'Bloqueado'}`}
                   </p>
-                  {isUnlocked && (
-                    <a href={index === 0 ? "/dashboard/fundamentos-crypto" : "#"} className="mt-2 text-[#ec4d58] underline block">
+                  {isUnlocked ? (
+                    <a 
+                      href={`/dashboard/iniciado/${index + 1}-${normalizeText(modulo)}`} 
+                      className="mt-2 text-[#ec4d58] underline block"
+                    >
                       Ver introducción
                     </a>
+                  ) : (
+                    <div className="absolute left-1/2 top-full mt-2 z-10 bg-black bg-opacity-80 text-white text-xs rounded px-3 py-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none w-56 -translate-x-1/2">
+                      {getUnlockMessage(index)}
+                    </div>
                   )}
                 </div>
               );
@@ -152,8 +202,8 @@ const IniciadoDashboard = () => {
                 <div key={key} className="flex items-center space-x-3 relative group">
                   <input
                     type="checkbox"
-                    checked={checklist[key]}
-                    onChange={key === 'video' ? undefined : () => setChecklist(prev => ({ ...prev, [key]: !prev[key] }))}
+                    checked={checklist[key as keyof typeof checklist]}
+                    onChange={key === 'video' ? undefined : () => setChecklist(prev => ({ ...prev, [key]: !prev[key as keyof typeof checklist] }))}
                     readOnly={key === 'video'}
                     className={`form-checkbox h-5 w-5 text-[#ec4d58] rounded border-gray-400 dark:border-gray-600 bg-transparent ${key === 'video' ? 'cursor-not-allowed' : ''}`}
                   />
@@ -188,10 +238,3 @@ const IniciadoDashboard = () => {
 };
 
 export default IniciadoDashboard;
-
-const tips = [
-  "El miedo es el camino hacia el lado oscuro del trading...",
-  "La paciencia es la clave del éxito en el trading...",
-  "El conocimiento es poder en el mundo crypto...",
-  "La disciplina es el puente entre metas y logros..."
-];

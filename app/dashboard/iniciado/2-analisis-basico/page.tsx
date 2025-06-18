@@ -5,20 +5,11 @@ import ThemeToggle from '@/components/ui/ThemeToggle';
 import BackButton from '@/components/ui/BackButton';
 import Image from 'next/image';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import TimeZoneClock from '@/components/ui/TimeZoneClock';
 
-export default function FundamentosCryptoIntro() {
-  useEffect(() => {
-    // Iniciar el contador de 10 segundos cuando el usuario está en la página
-    const timer = setTimeout(() => {
-      localStorage.setItem('moduleUnlocked', 'true');
-      // Opcional: Actualizar el estado local si quieres mostrar algún feedback
-    }, 10000);
 
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function AnalisisBasicoIntro() {
   const [user, setUser] = useState(null);
-  const [hasRead, setHasRead] = useState(false);
   const supabase = createClientComponentClient();
 
   useEffect(() => {
@@ -27,15 +18,6 @@ export default function FundamentosCryptoIntro() {
       setUser(user);
     };
     getUser();
-
-    // Iniciar el contador de 10 segundos cuando el usuario está en la página
-    const timer = setTimeout(() => {
-      setHasRead(true);
-      // Aquí puedes agregar la lógica para actualizar el estado global
-      // o hacer una llamada a la API para desbloquear el módulo 2
-    }, 10000);
-
-    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -59,7 +41,10 @@ export default function FundamentosCryptoIntro() {
               <p className="text-gray-600 dark:text-gray-400">Rango: Iniciado</p>
             </div>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-6">
+            <TimeZoneClock />
+            <ThemeToggle />
+          </div>
         </header>
 
         <div className="card relative">
@@ -68,18 +53,24 @@ export default function FundamentosCryptoIntro() {
           </div>
           
           <div className="mt-12">
-            <h2 className="text-3xl font-bold mb-6 text-[#ec4d58]">Introducción a los Fundamentos Crypto</h2>
+            <h2 className="text-3xl font-bold mb-6 text-[#ec4d58]">Introducción al Análisis Básico</h2>
             <p className="mb-4 text-lg">
-              Las criptomonedas han revolucionado el mundo financiero al introducir un sistema descentralizado, seguro y transparente. El blockchain, la tecnología detrás de las criptomonedas, permite registrar transacciones de manera inmutable y sin intermediarios.
+              El análisis de mercados crypto requiere comprender tanto el análisis técnico como el fundamental. Estas herramientas te ayudarán a tomar decisiones más informadas en el trading.
             </p>
             <p className="mb-4 text-lg">
-              <strong>¿Qué es una criptomoneda?</strong> Es un activo digital que utiliza criptografía para asegurar las transacciones y controlar la creación de nuevas unidades. Bitcoin fue la primera, pero hoy existen miles de criptomonedas con diferentes propósitos y tecnologías.
+              <strong>¿Qué es el análisis técnico?</strong> Es el estudio de los movimientos del precio y volumen históricos para identificar patrones y tendencias. Utilizamos gráficos, indicadores y herramientas estadísticas para predecir posibles movimientos futuros.
             </p>
             <p className="mb-4 text-lg">
-              <strong>¿Por qué es importante?</strong> Las criptomonedas ofrecen libertad financiera, acceso global, y la posibilidad de participar en una economía digital sin fronteras. Sin embargo, también implican riesgos y requieren educación para operar de forma segura.
+              <strong>¿Por qué es importante?</strong> El análisis técnico te permite:
             </p>
+            <ul className="list-disc pl-8 mb-4 text-lg space-y-2">
+              <li>Identificar tendencias y puntos de entrada/salida</li>
+              <li>Gestionar el riesgo de manera efectiva</li>
+              <li>Tomar decisiones basadas en datos, no en emociones</li>
+              <li>Comprender el sentimiento del mercado</li>
+            </ul>
             <p className="mb-4 text-lg">
-              En este módulo aprenderás los conceptos clave: blockchain, wallets, exchanges, seguridad, y cómo empezar tu camino en el mundo crypto.
+              En este módulo, aprenderás los conceptos fundamentales del análisis técnico: soportes y resistencias, tendencias, patrones de velas, indicadores básicos y cómo combinarlos para crear tu propia estrategia.
             </p>
           </div>
         </div>
