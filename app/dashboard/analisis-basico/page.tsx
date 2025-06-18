@@ -39,7 +39,10 @@ export default function AnalisisBasicoIntro() {
               <p className="text-gray-600 dark:text-gray-400">Rango: Iniciado</p>
             </div>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-6">
+            <TimeZoneClock />
+            <ThemeToggle />
+          </div>
         </header>
 
         <div className="card relative">
