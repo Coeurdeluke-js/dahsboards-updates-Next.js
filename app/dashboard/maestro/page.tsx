@@ -2,19 +2,32 @@ export default function MaestroDashboard() {
   return (
     <div className="min-h-screen bg-[#121212] text-white p-6 space-y-4">
       {/* Header */}
-      <header className="flex justify-between items-center mb-6 bg-purple-900/10 p-3 rounded-lg border border-purple-500/20">
-        <div className="flex items-center gap-3">
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent">Panel de Maestro</h1>
-        </div>
-        <div className="flex items-center space-x-3">
-          <button className="p-1.5 rounded-lg bg-purple-900/20 hover:bg-purple-800/30 transition-all duration-300 border border-purple-500/20">
-            <span className="material-icons text-sm text-purple-400">notifications</span>
-          </button>
-          <button className="p-1.5 rounded-lg bg-purple-900/20 hover:bg-purple-800/30 transition-all duration-300 border border-purple-500/20">
-            <span className="material-icons text-sm text-purple-400">tune</span>
-          </button>
-        </div>
-      </header>
+      <header className="card flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+  {/* Bloque de Avatar y usuario */}
+  <div className="flex items-center gap-4">
+    <div className="w-16 h-16 rounded-full overflow-hidden shadow-md">
+      <Image 
+        src={user?.user_metadata?.avatar_url || "/images/default-avatar.png"} 
+        alt="Avatar" 
+        width={64} 
+        height={64} 
+        className="rounded-full" 
+        priority 
+      />
+    </div>
+    <div>
+      <h1 className="text-2xl font-bold">{user?.email || 'Iniciado'}</h1>
+      <p className="text-gray-600 dark:text-gray-400">Rango: Iniciado</p>
+    </div>
+  </div>
+
+  {/* Bloque de reloj + toggle */}
+  <div className="flex items-center gap-4 mt-4 md:mt-0 self-end md:self-auto">
+    <TimeZoneClock />
+    <ThemeToggle />
+  </div>
+</header>
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Métricas Globales */}

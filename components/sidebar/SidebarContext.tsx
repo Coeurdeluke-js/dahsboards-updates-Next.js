@@ -1,32 +1,64 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
-interface SidebarContextType {
-  isCollapsed: boolean;
+interface SidebarContextProps {
+  isOpen: boolean;
+  isExpanded: boolean;
   toggleSidebar: () => void;
 }
 
-const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
+const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
 
-export function SidebarProvider({ children }: { children: ReactNode }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
+export const SidebarProvider = ({ children }: { children: ReactNode }) => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+    
+    // Opcional: Persistir el estado en localStorage
+    const savedState = localStorage.getItem('sidebar-expanded');
+    if (savedState !== null) {
+      setIsOpen(JSON.parse(savedState));
+    }
+  }, []);
+  
   const toggleSidebar = () => {
-    setIsCollapsed(prev => !prev);
+    setIsOpen((prev) => {
+      const newState = !prev;
+      // Opcional: Guardar en localStorage
+      localStorage.setItem('sidebar-expanded', JSON.stringify(newState));
+      return newState;
+    });
   };
-
+  
+  // Evitar hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-[#121212] text-[#fafafa]">
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#ec4d58]"></div>
+        </div>
+      </div>
+    );
+  }
+  
   return (
-    <SidebarContext.Provider value={{ isCollapsed, toggleSidebar }}>
+    <SidebarContext.Provider value={{ 
+      isOpen, 
+      isExpanded: isOpen,
+      toggleSidebar 
+    }}>
       {children}
     </SidebarContext.Provider>
   );
-}
+};
 
-export function useSidebar() {
+export const useSidebar = () => {
   const context = useContext(SidebarContext);
-  if (context === undefined) {
-    throw new Error('useSidebar must be used within a SidebarProvider');
+  if (!context) {
+    throw new Error("useSidebar debe usarse dentro de SidebarProvider");
   }
   return context;
-}
+};

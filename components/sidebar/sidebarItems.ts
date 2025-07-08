@@ -1,24 +1,16 @@
-import { BookOpen, ChevronRight, Star, Settings } from 'lucide-react';
+import { FiHome, FiBookOpen, FiUser, FiLogOut, FiMessageCircle } from "react-icons/fi";
 
 export const sidebarItems = [
-  {
-    icon: BookOpen,
-    label: "Explora la Academia",
-    description: "Accede a los módulos y lecciones base."
-  },
-  {
-    icon: Star,
-    label: "Convertirse en Acólito",
-    description: "Comienza tu proceso de ascenso y desbloqueos."
-  },
-  {
-    icon: ChevronRight,
-    label: "Eventos abiertos",
-    description: "Mira qué sesiones o charlas están disponibles."
-  },
-  {
-    icon: Settings,
-    label: "Ajustes básicos",
-    description: "Configura tu cuenta, notificaciones y más."
-  }
+  { label: "Panel General", href: "/dashboard", icon: FiHome },
+  { label: "Mensaje de bienvenida", href: "/dashboard/mensaje", icon: FiMessageCircle },
+  { label: "Explora la Academia", href: "/dashboard/iniciado/cursos", icon: FiBookOpen },
+  { label: "Ajustes básicos", href: "/dashboard/iniciado/ajustes", icon: "⚙" }
+];
+
+export const sidebarItemsAcolito = [
+  { label: "Inicio", href: "/dashboard/acolito", icon: FiHome },
+  { label: "Explora la Academia", href: "/dashboard/academia", icon: FiBookOpen },
+  { label: "Convertirse en Acólito", href: "/dashboard/acolito/convertirse", icon: "🧙" },
+  { label: "Eventos abiertos", href: "/dashboard/acolito/eventos", icon: "📅" },
+  { label: "Ajustes básicos", href: "/dashboard/acolito/ajustes", icon: "⚙" }
 ];

@@ -114,7 +114,7 @@ export default function HomePage() {
                   alt="Zoomex Logo"
                   width={100}
                   height={28}
-                  className="inline-block align-middle -ml-2"
+                  className="inline-block align-middle -ml-2 w-auto h-auto"
                   priority
                 />
               </p>

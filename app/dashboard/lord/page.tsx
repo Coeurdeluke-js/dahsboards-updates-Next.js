@@ -36,25 +36,32 @@ export default function LordDashboard() {
   return (
     <div className="p-8 space-y-6">
       {/* Header con información del usuario */}
-      <header className="flex justify-between items-center mb-8 bg-blue-900/10 p-4 rounded-lg">
-        <div className="flex items-center gap-4">
-          <div className="relative w-16 h-16">
-            <Image
-              src={user?.user_metadata?.avatar_url || "/images/default-avatar.png"}
-              alt="Avatar"
-              width={64}
-              height={64}
-              className="rounded-full border-2 border-blue-400"
-              priority
-            />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold">{user?.email || 'Lord'}</h1>
-            <p className="text-blue-400">Rango: Lord</p>
-          </div>
-        </div>
-        <ThemeToggle />
-      </header>
+      <header className="card flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+  {/* Bloque de Avatar y usuario */}
+  <div className="flex items-center gap-4">
+    <div className="w-16 h-16 rounded-full overflow-hidden shadow-md">
+      <Image 
+        src={user?.user_metadata?.avatar_url || "/images/default-avatar.png"} 
+        alt="Avatar" 
+        width={64} 
+        height={64} 
+        className="rounded-full" 
+        priority 
+      />
+    </div>
+    <div>
+      <h1 className="text-2xl font-bold">{user?.email || 'Iniciado'}</h1>
+      <p className="text-gray-600 dark:text-gray-400">Rango: Iniciado</p>
+    </div>
+  </div>
+
+  {/* Bloque de reloj + toggle */}
+  <div className="flex items-center gap-4 mt-4 md:mt-0 self-end md:self-auto">
+    <TimeZoneClock />
+    <ThemeToggle />
+  </div>
+</header>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Gestor de Estudiantes Asignados */}

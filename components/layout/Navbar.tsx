@@ -46,8 +46,12 @@ export default function Navbar() {
       <div className="fixed top-0 left-0 right-0 z-50 border-b border-[#ec4d58]/20 rounded-b-2xl overflow-hidden">
         <div className="absolute inset-0 animate-light-wave z-0" />
 
-        <nav className="relative w-full bg-[#121212]/90 backdrop-blur-md flex justify-between items-center px-6 py-3 max-w-full z-50">
+        <nav className="relative w-full bg-[#121212]/90 backdrop-blur-md flex justify-between items-center px-4 sm:px-6 py-3 max-w-full z-50">
           <div className="flex justify-between items-center max-w-7xl w-full mx-auto">
+            {/* LOGO ELIMINADO */}
+            <div className="flex items-center space-x-2 z-10">
+              {/* Logo removido según solicitud */}
+            </div>
 
             {/* NAV DESKTOP */}
             <div className="hidden md:flex space-x-8 items-center z-10">
@@ -62,7 +66,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4">
               {user ? (
                 <>
                   <RoleSelector />
@@ -91,27 +95,23 @@ export default function Navbar() {
                   <Link href="/perfil" className="text-white hover:text-[#ec4d58] font-semibold">
                     Perfil
                   </Link>
-                  <button
-                    onClick={logout}
-                    className="text-white hover:text-[#ec4d58] font-semibold"
-                  >
-                    Cerrar Sesión
-                  </button>
+                  {/* Eliminar esta duplicación del botón logout */}
                 </>
               )}
             </div>
 
-            {/* NAV COLAPSADA MÓVIL */}
+            {/* NAV COLAPSADA MÓVIL - Logo eliminado */}
             <div className={clsx("md:hidden flex items-center justify-between w-full z-10 transition-opacity duration-300", {
               'opacity-0 pointer-events-none': isMobileMenuOpen,
               'opacity-100': !isMobileMenuOpen,
             })}>
-              <div className="flex gap-4 items-center">
-                {mainLinks.map(({ href, icon, label }) => (
+              {/* Logo móvil eliminado */}
+              <div className="flex gap-3 items-center flex-1 justify-center">
+                {mainLinks.slice(0, 3).map(({ href, icon, label }) => (
                   <Link
                     key={href}
                     href={href}
-                    className="text-white hover:text-[#ec4d58] text-xl relative group"
+                    className="text-white hover:text-[#ec4d58] text-lg relative group p-2"
                     title={label}
                   >
                     <i className={icon}></i>
@@ -119,7 +119,7 @@ export default function Navbar() {
                 ))}
                 <Link 
                   href="/game" 
-                  className="text-[#ec4d58] hover:text-white text-xl" 
+                  className="text-[#ec4d58] hover:text-white text-lg p-2" 
                   title="The Siths Clash"
                 >
                   <i className="fas fa-bolt"></i>
@@ -127,9 +127,9 @@ export default function Navbar() {
               </div>
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="ml-4 text-white hover:text-[#ec4d58]"
+                className="text-white hover:text-[#ec4d58] p-2"
               >
-                <i className="fas fa-bars text-2xl"></i>
+                <i className="fas fa-bars text-xl"></i>
               </button>
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function Navbar() {
             'flex flex-col gap-4 px-6 pt-24 pb-8 min-h-screen'
           )}
         >
-          {/* Agregar el botón de inicio de sesión para mobile */}
+          {/* Botón de inicio de sesión para mobile */}
           {!user && (
             <div className="w-full">
               <button
@@ -175,90 +175,51 @@ export default function Navbar() {
               )}
             </div>
           )}
+          
+          {/* Enlaces principales */}
           {mainLinks.map(({ href, label, icon }) => (
             <Link
               key={href}
               href={href}
+              className="text-white hover:text-[#ec4d58] transition-colors flex items-center gap-3 text-lg font-semibold py-3 px-4 rounded-lg hover:bg-[#ec4d58]/10"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-4 text-white hover:text-[#ec4d58] text-lg px-4 py-2 rounded-md transition-all"
             >
-              <i className={`${icon} text-2xl w-8 text-center`}></i>
-              <span className="font-semibold tracking-wide">{label}</span>
+              <i className={`${icon} w-6`}></i> {label}
             </Link>
           ))}
-
+          
+          {/* The Siths Clash */}
           <Link
             href="/game"
+            className="bg-gradient-to-tr from-[#ec4d58] via-[#c6373e] to-[#ec4d58] text-white px-4 py-3 rounded-lg hover:brightness-110 transition-all flex items-center justify-center gap-2 font-semibold"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="flex items-center gap-4 bg-gradient-to-tr from-[#ec4d58] via-[#c6373e] to-[#ec4d58] text-white px-5 py-3 rounded-lg font-semibold border border-[#ec4d58] shadow-lg transition-all hover:brightness-110"
           >
-            <i className="fas fa-bolt text-2xl w-8 text-center"></i>
-            The Siths Clash
+            <i className="fas fa-bolt"></i> The Siths Clash
           </Link>
-
-          {/* BOTÓN COLAPSAR */}
-          <button
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="mt-6 flex items-center justify-center text-white hover:text-[#ec4d58] text-sm gap-2 border border-[#ec4d58]/30 rounded-lg px-4 py-2 transition-all"
-          >
-            <i className="fas fa-chevron-up"></i> Cerrar Menú
-          </button>
+          
+          {/* Opciones de usuario */}
+          {user && (
+            <>
+              <Link 
+                href="/perfil" 
+                className="text-white hover:text-[#ec4d58] transition-colors flex items-center gap-3 text-lg font-semibold py-3 px-4 rounded-lg hover:bg-[#ec4d58]/10"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <i className="fas fa-user w-6"></i> Perfil
+              </Link>
+              <button
+                onClick={() => {
+                  logout();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="text-white hover:text-[#ec4d58] transition-colors flex items-center gap-3 text-lg font-semibold py-3 px-4 rounded-lg hover:bg-[#ec4d58]/10 text-left w-full"
+              >
+                <i className="fas fa-sign-out-alt w-6"></i> Cerrar Sesión
+              </button>
+            </>
+          )}
         </div>
       )}
-
-      <style jsx>{`
-        @keyframes lightWave {
-          0% {
-            transform: translateX(-100%);
-            opacity: 0.1;
-          }
-          50% {
-            transform: translateX(0%);
-            opacity: 0.2;
-          }
-          100% {
-            transform: translateX(100%);
-            opacity: 0.1;
-          }
-        }
-
-        .animate-light-wave {
-          background: radial-gradient(
-            circle at 30% 50%,
-            rgba(236, 77, 88, 0.1),
-            transparent 60%
-          );
-          animation: lightWave 6s ease-in-out infinite;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out forwards;
-        }
-
-        @keyframes slideFadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-slideFadeInDown {
-          animation: slideFadeInDown 0.4s ease-out forwards;
-        }
-      `}</style>
     </>
   );
 }

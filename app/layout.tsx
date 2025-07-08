@@ -3,6 +3,7 @@ import { Inter, Exo_2 } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import { AuthProvider } from '@/context/AuthContext'
+import { ThemeProvider } from '@/components/layout/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const exo2 = Exo_2({ subsets: ['latin'], variable: '--font-exo' })
@@ -40,8 +41,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${exo2.variable}`}>
-        <AuthProvider>
-          <div className="triangle-background">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <AuthProvider>
+            <div className="triangle-background">
             <div className="triangle-dots"></div>
           </div>
           <div className="relative z-10"> {/* Add this wrapper */}
@@ -49,6 +51,7 @@ export default function RootLayout({
             {children}
           </div>
         </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

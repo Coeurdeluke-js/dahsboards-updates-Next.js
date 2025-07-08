@@ -81,6 +81,15 @@ export default function RoleSelector() {
     router.push(path);
   };
 
+  if (!mounted) {
+    return (
+      <button className="flex items-center space-x-2 px-4 py-2 rounded text-[#fafafa] opacity-50">
+        <span>Roles</span>
+        <i className="fas fa-chevron-down"></i>
+      </button>
+    );
+  }
+
   const modalContent = isOpen && (
     <div className="fixed inset-0 flex items-center justify-center" style={{ zIndex: 99999 }}>
       <div 
@@ -134,7 +143,7 @@ export default function RoleSelector() {
         <i className="fas fa-chevron-down"></i>
       </button>
 
-      {mounted && modalContent && createPortal(modalContent, document.body)}
+      {modalContent && createPortal(modalContent, document.body)}
     </>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { createClientComponentClient, User } from '@supabase/auth-helpers-nextjs';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function DarthDashboard() {
   const router = useRouter();
@@ -49,13 +50,14 @@ export default function DarthDashboard() {
       <div className="p-6 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <Image 
-              src={user?.user_metadata?.avatar_url || '/images/default-avatar.png'} 
-              alt="Avatar" 
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
+            <div className="relative w-10 h-10">
+              <Image 
+                src={user?.user_metadata?.avatar_url || '/images/default-avatar.png'}
+                alt="Avatar" 
+                fill
+                className="rounded-full object-cover"
+              />
+            </div>
             <div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                 Darth {user?.user_metadata?.full_name || user?.email}
